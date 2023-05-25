@@ -1,13 +1,19 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
 
         File file = new File("input");
-        Scanner sc = new Scanner(file);
+        Scanner sc = null;
+        try {
+            sc = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
         double a = 0;
         double b = 0;
         boolean flag = true;
