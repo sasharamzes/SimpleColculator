@@ -1,22 +1,26 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws FileNotFoundException{
 
         File file = new File("input");
+        File file1 = new File("output");
+        PrintWriter pw = new PrintWriter(file1);
         Scanner sc = null;
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            pw.println("File not found");
         }
         double a = 0;
         double b = 0;
         boolean flag = true;
+
         sc.useLocale(Locale.US);
         String str = sc.nextLine();
         String[] arr = str.split(" ");
@@ -24,31 +28,31 @@ public class Main {
             a = Double.parseDouble(arr[0]);
             b = Double.parseDouble(arr[2]);
         } catch (NumberFormatException e) {
-            System.out.println("Error! Not number");
+            pw.println("Error! Not number");
             flag = false;return;
         }
         if("/*-+".contains(arr[1]) && flag){
             switch (arr[1]){
                 case "+":{
-                    System.out.println(a + b);break;}
+                    pw.println(a + b);break;}
                 case "-":{
-                    System.out.println(a - b);break;
+                    pw.println(a - b);break;
                 }
                 case "*":{
-                    System.out.println(a * b);break;
+                    pw.println(a * b);break;
                 }
                 case "/":{
                     try {
                         if(b == 0.0)
-                        System.out.println("Error! Division by zero");
+                        pw.println("Error! Division by zero");
                         else
-                        System.out.println(a / b);
+                        pw.println(a / b);
                     } catch (ArithmeticException e) {
 
                     }break;
                 }
             }
         }else
-            System.out.println("Operation Error!");
+            pw.println("Operation Error!");
     }
 }
